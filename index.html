@@ -12,16 +12,110 @@
       name="keywords"
       content="EUA Afora, fotos de viagem, compartilhar fotos, galeria"
     />
-    <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="./vendor/normalize.css" />
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="index.css">
     <title>EUA Afora</title>
   </head>
   <body>
     <div class="page">
-      <header>
-        <img src="images/imgHeader.jpg" alt="logo do header" />
+      <header class="header">
+        <img src="images/Vector.png" alt="logo do header" class="header__vector"/>
+        <img src="images/Line.png" alt="linha do header" class="header__line"/>
       </header>
+      <main class="content">
+        <section class="gallery">
+          <img src="images/avatar.jpg" alt="foto de Jacques Cousteau" class="profile__avatar"/>
+          <div class="profile">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button class="profile__edit" aria-label="Editar prerfil" type="button"></button>
+            <h2 class="profile__role">Esplorador</h2>
+          </div>
+          <button class="profile__add" aria-label="Adicionar cards" type="button"></button>
+        </section>
+        <section class="elements">
+          <div class="element__card">
+            <img src="images/vale_yosemite.jpg" alt="Imagem do Vale Yosemite" class="element__image"/>
+            <div class="element__places">
+              <p class="element__place">Vale de Yosemite</p>
+              <button class="element__like" aria-label="Botão Like" type="button">
+                <img src="images/Group.png" alt="Coração de like" class="element__like-image"/>
+              </button>
+            </div>
+          </div>
+          <div class="element__card">
+            <img src="images/Lago_Louise.png" alt="Imagem do Lago Louise" class="element__image"/>
+            <div class="element__places">
+              <p class="element__place">Lago Louise</p>
+              <button class="element__like" aria-label="Botão Like" type="button">
+                <img src="images/Group.png" alt="Coração de like" class="element__like-image"/>
+              </button>
+            </div>
+          </div>
+          <div class="element__card">
+            <img src="images/Montanhas_Care.png" alt="Imagem das Montanhas Carecas" class="element__image"/>
+            <div class="element__places">
+              <p class="element__place">Montanhas Care..</p>
+              <button class="element__like" aria-label="Botão Like" type="button">
+                <img src="images/Group.png" alt="Coração de like" class="element__like-image"/>
+              </button>
+            </div>
+          </div>
+          <div class="element__card">
+            <img src="images/Latemar.png" alt="Imagem de Latemar" class="element__image"/>
+            <div class="element__places">
+              <p class="element__place">Latemar</p>
+              <button class="element__like" aria-label="Botão Like" type="button">
+                <img src="images/Group.png" alt="Coração de like" class="element__like-image"/>
+              </button>
+            </div>
+          </div>
+          <div class="element__card">
+            <img src="images/Parque_Nacional.png" alt="Imagem do Parque Nacional" class="element__image"/>
+            <div class="element__places">
+              <p class="element__place">Parque Nacional..</p>
+              <button class="element__like" aria-label="Botão Like" type="button">
+                <img src="images/Group.png" alt="Coração de like" class="element__like-image"/>
+              </button>
+            </div>
+          </div>
+          <div class="element__card">
+            <img src="images/Lago_di_Braies.png" alt="Imagem do Lago di Braies" class="element__image"/>
+            <div class="element__places">
+              <p class="element__place">Lago di Braies</p>
+              <button class="element__like" aria-label="Botão Like" type="button">
+                <img src="images/Group.png" alt="Coração de like" class="element__like-image"/>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
+      </footer>
+    </div>
+    <div class="pop-up" id="edit-pop-up">
+      <div class="pop-up__container">
+        <button class="pop-up__close" aria-label="Fechar"></button>
+        <h2 class="pop-up__title">Editar perfil</h2>
+        <form class="pop-up__form">
+          <input
+            type="text"
+            class="pop-up__input"
+            name="name"
+            placeholder="Jacques Cousteau"
+            required
+          />
+          <input
+            type="text"
+            class="pop-up__input"
+            name="role"
+            placeholder="Explorador"
+            required
+          />
+          <button type="submit" class="pop-up__submit">Salvar</button>
+        </form>
+      </div>
     </div>
     <script src="index.js"></script>
   </body>
