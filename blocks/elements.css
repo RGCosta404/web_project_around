@@ -1,0 +1,72 @@
+.elements{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 880px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.element__card{
+    width: 282px;
+    height: 361px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.element__image{
+    width: 282px;
+    height: 282px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.element__places{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 15px 0 21px;
+}
+
+.element__place {
+    color: #000;
+    font-size: 24px;
+    line-height: 100%;
+    font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.element__like {
+    background-image: url(../images/Vector.png);
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    width: 21px;
+    height: 19px;
+}
+
+.element__like:hover {
+    opacity: 0.5;
+}
+
+@media (max-width: 1024px) {
+    .elements{
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
+        margin: auto;
+    }
+}
+
+@media (max-width: 544px) {
+    .elements{
+        grid-template-columns: repeat(1, auto);
+        justify-content: center;
+        margin: auto;
+    }
+}
