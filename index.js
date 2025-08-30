@@ -1,30 +1,31 @@
-// Vamos encontrar o formulário no DOM
-let formElement = // Use o método querySelector()
 
-// Em seguida vem o handler do submit
-// ainda não vai enviar para lugar nenhum
+let formElement = document.querySelector('.pop-up__form');
+let editButton = document.querySelector('.profile__edit');
+let closeButton = document.querySelector('.pop-up__close');
+let popup = document.querySelector('#edit-pop-up');
 
-// Observe que o nome da função começa com um verbo
-// e descreve exatamente o que a função faz
+let profileName = document.querySelector('.profile__name');
+let profileRole = document.querySelector('.profile__role');
+
+let nameInput = document.querySelector('.pop-up__input[name="name"]');
+let roleInput = document.querySelector('.pop-up__input[name="role"]');
+
 function handleProfileFormSubmit(evt) {
-    // Esta linha impede o navegador 
-    // de enviar o formulário da forma padrão.
+    
     evt.preventDefault();
-    // Fazendo isso, podemos definir nossa própria forma de enviar o formulário.
-    // Explicaremos em mais detalhes posteriormente.
+ 
+    let nameInput = document.querySelector('#name-input');
+    let roleInput = document.querySelector('#role-input');
 
-    // Vamos encontrar os campos de formulário do DOM
-    let nameInput = // Use querySelector()
-    let jobInput = // Use querySelector()
+   let nameValue = nameInput.value;
+   let roleValue = roleInput.value;
 
-    // Pegue os valores de cada campo do valor da propriedade correspondente
+   let nameDisplayElement = document.querySelector('.profile__name');
+   let roleDisplayElement = document.querySelector('.profile__role');
 
-    // Selecione os elementos aos quais os valores dos campos serão inseridos
-
-    // Insira novos valores usando a
-    // propriedade textContent
+    nameDisplayElement.textContent = namevalue;
+    roleDisplayElement.textContent = rolevalue;
 }
 
-// Conecte o handler ao formulário:
-// ele vai observar o evento de submit
+
 formElement.addEventListener('submit', handleProfileFormSubmit);
