@@ -10,22 +10,31 @@ let profileRole = document.querySelector('.profile__role');
 let nameInput = document.querySelector('.pop-up__input[name="name"]');
 let roleInput = document.querySelector('.pop-up__input[name="role"]');
 
+function openPopup() {
+    nameInput.value = profileName.textContent;
+    roleInput.value = profileRole.textContent;
+
+    popup.style.display = 'flex';
+}
+
+function closePopup() {
+    popup.style.display = 'none';
+}
+
 function handleProfileFormSubmit(evt) {
     
     evt.preventDefault();
- 
-    let nameInput = document.querySelector('#name-input');
-    let roleInput = document.querySelector('#role-input');
+
 
    let nameValue = nameInput.value;
    let roleValue = roleInput.value;
 
-   let nameDisplayElement = document.querySelector('.profile__name');
-   let roleDisplayElement = document.querySelector('.profile__role');
+    profileName.textContent = nameValue;
+    profileRole.textContent = roleValue;
 
-    nameDisplayElement.textContent = namevalue;
-    roleDisplayElement.textContent = rolevalue;
+    closePopup();
 }
 
-
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', handleProfileFormSubmit);
