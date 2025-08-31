@@ -7,14 +7,14 @@
     margin: 0 auto;
 }
 
-.element__card{
+.elements__card{
     width: 100%;
     height: 361px;
     background-color: #fff;
     border-radius: 10px;
 }
 
-.element__image{
+.elements__image{
     width: 100%;
     height: 282px;
     border-top-left-radius: 10px;
@@ -22,14 +22,14 @@
     object-fit: cover;
 }
 
-.element__places{
+.elements__places{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 15px 0 21px;
 }
 
-.element__place {
+.elements__place {
     color: #000;
     font-size: 24px;
     line-height: 100%;
@@ -40,7 +40,7 @@
     text-align: center;
 }
 
-.element__like {
+.elements__like {
     background-image: url(../images/Vector.png);
     background-color: transparent;
     background-size: cover;
@@ -52,7 +52,7 @@
     height: 19px;
 }
 
-.element__like:hover {
+.elements__like:hover {
     opacity: 0.5;
 }
 
