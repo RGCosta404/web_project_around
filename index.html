@@ -29,7 +29,7 @@
             <button class="profile__edit" aria-label="Editar perfil" type="button"></button>
             <h2 class="profile__role">Esplorador</h2>
           </div>
-          <button class="profile__add" aria-label="Adicionar cards" type="button"></button>
+          <button class="content__add" aria-label="Adicionar cards" type="button"></button>
         </section>
         <section class="elements">
           <div class="elements__card">
@@ -92,26 +92,26 @@
         <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
       </footer>
     </div>
-    <div class="pop-up" id="edit-pop-up">
-      <div class="pop-up__container">
-        <button class="pop-up__close" aria-label="Fechar"></button>
-        <h2 class="pop-up__title">Editar perfil</h2>
-        <form class="pop-up__form">
+    <div class="popup" id="edit-popup">
+      <div class="popup__container">
+        <button class="popup__close" aria-label="Fechar"></button>
+        <h2 class="popup__title">Editar perfil</h2>
+        <form class="popup__form">
           <input
             type="text"
-            class="pop-up__input"
+            class="popup__input"
             name="name"
             placeholder="Jacques Cousteau"
             required
           />
           <input
             type="text"
-            class="pop-up__input"
+            class="popup__input"
             name="role"
             placeholder="Explorador"
             required
           />
-          <button type="submit" class="pop-up__submit">Salvar</button>
+          <button type="submit" class="popup__submit">Salvar</button>
         </form>
       </div>
     </div>

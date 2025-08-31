@@ -1,14 +1,14 @@
 
-let formElement = document.querySelector('.pop-up__form');
-let editButton = document.querySelector('.profile__edit');
-let closeButton = document.querySelector('.pop-up__close');
-let popup = document.querySelector('#edit-pop-up');
+const formElement = document.querySelector('.popup__form');
+const editButton = document.querySelector('.profile__edit');
+const closeButton = document.querySelector('.popup__close');
+const popup = document.querySelector('#edit-popup');
 
-let profileName = document.querySelector('.profile__name');
-let profileRole = document.querySelector('.profile__role');
+const profileName = document.querySelector('.profile__name');
+const profileRole = document.querySelector('.profile__role');
 
-let nameInput = document.querySelector('.pop-up__input[name="name"]');
-let roleInput = document.querySelector('.pop-up__input[name="role"]');
+const nameInput = document.querySelector('.popup__input[name="name"]');
+const roleInput = document.querySelector('.popup__input[name="role"]');
 
 function openPopup() {
     nameInput.value = profileName.textContent;
@@ -26,8 +26,8 @@ function handleProfileFormSubmit(evt) {
     evt.preventDefault();
 
 
-   let nameValue = nameInput.value;
-   let roleValue = roleInput.value;
+   const nameValue = nameInput.value;
+   const roleValue = roleInput.value;
 
     profileName.textContent = nameValue;
     profileRole.textContent = roleValue;
