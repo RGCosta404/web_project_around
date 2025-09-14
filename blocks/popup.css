@@ -25,6 +25,10 @@
 }
 
 .popup__close {
+    width: 40px;
+    height: 40px;
+    top: -40px;
+    right: -40px;
     position: absolute;
     background-color: transparent;
     background-image: url(../images/Close_Icon.png);
@@ -33,10 +37,6 @@
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    top: -40px;
-    right: -40px;
 }
 
 .popup__title {
@@ -76,6 +76,26 @@
 
 .popup__submit:hover {
     opacity: 0.8;
+}
+
+.popup__container_type_image {
+  background-color: transparent;
+  max-width: 75vw;
+  max-height: 75vh;
+  padding: 0;
+}
+
+.popup__image {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+.popup__caption {
+  color: white;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 10px 0 0 0;
 }
 
 @media (max-width: 544px) {

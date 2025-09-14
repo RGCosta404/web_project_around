@@ -1,9 +1,8 @@
 .elements{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
     gap: 16px;
     max-width: 880px;
-    width: 100%;
     margin: 0 auto;
 }
 
@@ -12,6 +11,7 @@
     height: 361px;
     background-color: #fff;
     border-radius: 10px;
+    position: relative;
 }
 
 .elements__image{
@@ -20,6 +20,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     object-fit: cover;
+    display: block;
 }
 
 .elements__places{
@@ -41,7 +42,19 @@
 }
 
 .elements__like {
-    background-image: url(../images/Vector.png);
+    background-image: url(../images/group.png);
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    width: 21px;
+    height: 19px;
+}
+
+.elements__like-active {
+    background-image: url(../images/group_active.png);
     background-color: transparent;
     background-size: cover;
     background-position: center;
@@ -53,6 +66,25 @@
 }
 
 .elements__like:hover {
+    opacity: 0.5;
+}
+
+.elements__delete-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 19px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-image: url('../images/Trash.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.elements__delete-button:hover {
     opacity: 0.5;
 }
 
