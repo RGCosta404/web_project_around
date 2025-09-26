@@ -62,7 +62,7 @@
     font-size: 16px;
 }
 
-.popup__submit {
+.popup__button {
     background-color: #000;
     color: #fff;
     border: none;
@@ -74,7 +74,7 @@
     border-radius: 2px;
 }
 
-.popup__submit:hover {
+.popup__button:hover {
     opacity: 0.8;
 }
 
@@ -96,6 +96,31 @@
   font-size: 12px;
   line-height: 15px;
   margin: 10px 0 0 0;
+}
+
+.popup__error {
+    font-size: 12px;
+    color: red;
+    height: 14px;
+    margin-top: 2px;
+}
+
+.popup__input_type_error {
+    border-bottom: 2px solid red !important;
+}
+
+.popup__error_visible {
+    opacity: 1;
+}
+
+.popup__button_disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.popup__button_disabled:hover {
+    opacity: 1;
 }
 
 @media (max-width: 544px) {

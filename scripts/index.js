@@ -155,3 +155,33 @@ function closeImagePopup() {
 }
 
 imagePopupCloseButton.addEventListener('click', closeImagePopup);
+
+const editPopup = document.querySelector('#edit-popup');
+editPopup.addEventListener('click', function(evt) {
+    if (evt.target === evt.currentTarget) {
+        closePopup();
+    }
+});
+
+const addCardPopup = document.querySelector('#add-popup');
+addCardPopup.addEventListener('click', function(evt) {
+    if (evt.target === evt.currentTarget) {
+        closeAddPopup();
+    }
+});
+
+const imageCardPopup = document.querySelector('#image-popup');
+imageCardPopup.addEventListener('click', function(evt) {
+    if (evt.target === evt.currentTarget) {
+        closeImagePopup();
+    }
+});
+
+document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+      closePopup();
+      closeAddPopup();
+      closeImagePopup();
+    }
+  });
+
