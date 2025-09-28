@@ -53,7 +53,7 @@
     height: 19px;
 }
 
-.elements__like-active { /*teste de correçao*/
+.elements__like-active { /*teste de correçao */
     background-image: url(../images/group_active.png);
     background-color: transparent;
     background-size: cover;
