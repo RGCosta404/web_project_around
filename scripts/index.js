@@ -80,12 +80,6 @@ const initialCards = [
 initialCards.forEach(element => {
     const cardElement = createCard(element);
     const elementsSection = document.querySelector('.elements');
-
-    const likeButton = cardElement.querySelector('.elements__like');
-    likeButton.addEventListener('click', () => {
-        likeButton.classList.toggle('elements__like-active');
-    });
-    
     elementsSection.appendChild(cardElement);
 });
 
@@ -132,6 +126,11 @@ function createCard(cardData) {
 
     const placeElement = cardElement.querySelector('.elements__place');
     placeElement.textContent = cardData.name;
+
+    const likeButton = cardElement.querySelector('.elements__like');
+    likeButton.addEventListener('click', () => {
+        likeButton.classList.toggle('elements__like-active');
+    });
 
 
     const deleteButton = cardElement.querySelector('.elements__delete-button');
