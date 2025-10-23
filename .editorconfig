@@ -8,7 +8,7 @@ root = true
 # Estilo de indentação
 # Valores possíveis — tabulação, espaço
 indent_style = space
-
+ 
 # Tamanho da indentação em caracteres de espaçamento simples
 # Valores possíveis — um número inteiro, tabulação
 indent_size = 2

@@ -12,28 +12,42 @@
       name="keywords"
       content="EUA Afora, fotos de viagem, compartilhar fotos, galeria"
     />
-    <link rel="stylesheet" href="./pages/index.css">
+    <link rel="stylesheet" href="./pages/index.css" />
     <title>EUA Afora</title>
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <img src="images/Vector.png" alt="logo do header" class="header__vector"/>
-        <img src="images/Line.png" alt="linha do header" class="header__line"/>
+        <img
+          src="images/Vector.png"
+          alt="logo do header"
+          class="header__vector"
+        />
+        <img src="images/Line.png" alt="linha do header" class="header__line" />
       </header>
       <main class="content">
         <section class="content__profile">
-          <img src="images/avatar.jpg" alt="foto de Jacques Cousteau" class="content__profile-avatar"/>
+          <img
+            src="images/avatar.jpg"
+            alt="foto de Jacques Cousteau"
+            class="content__profile-avatar"
+          />
           <div class="profile">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="profile__edit" aria-label="Editar perfil" type="button"></button>
+            <button
+              class="profile__edit"
+              aria-label="Editar perfil"
+              type="button"
+            ></button>
             <h2 class="profile__role">Esplorador</h2>
           </div>
-          <button class="content__add" aria-label="Adicionar cards" type="button"></button>
+          <button
+            class="content__add"
+            aria-label="Adicionar cards"
+            type="button"
+          ></button>
         </section>
-        <section class="elements">
-          
-        </section>
+        <section class="elements"></section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
@@ -71,55 +85,61 @@
       </div>
     </div>
     <div class="popup" id="add-popup">
-        <div class="popup__container">
-          <button class="popup__close" type="button"></button>
-          <h2 class="popup__title">Novo local</h2>
-          <form class="popup__form" name="add-card-form">
-            <input
-              type="text"
-              class="popup__input"
-              name="place"
-              placeholder="Nome"
-              required
-              id="place-input"
-              minlength="1"
-              maxlength="30"
-            />
-            <span id="place-input-error" class="popup__error"></span>
-            <input
-              type="url"
-              class="popup__input"
-              name="link"
-              placeholder="Link da imagem"
-              required
-              id="link-input"
-              minlength="1"
-              maxlength="200"
-            />
-            <span id="link-input-error" class="popup__error"></span>
-            <button type="submit" class="popup__button">criar</button>
-          </form>
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Novo local</h2>
+        <form class="popup__form" name="add-card-form">
+          <input
+            type="text"
+            class="popup__input"
+            name="place"
+            placeholder="Nome"
+            required
+            id="place-input"
+            minlength="1"
+            maxlength="30"
+          />
+          <span id="place-input-error" class="popup__error"></span>
+          <input
+            type="url"
+            class="popup__input"
+            name="link"
+            placeholder="Link da imagem"
+            required
+            id="link-input"
+            minlength="1"
+            maxlength="200"
+          />
+          <span id="link-input-error" class="popup__error"></span>
+          <button type="submit" class="popup__button">criar</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="image-popup">
+      <div class="popup__container popup__container_type_image">
+        <button class="popup__close" type="button"></button>
+        <img class="popup__image" src="#" alt="" />
+        <p class="popup__caption"></p>
+      </div>
+    </div>
+    <template id="card-template">
+      <div class="elements__card">
+        <button
+          class="elements__delete-button"
+          aria-label="Deletar card"
+          type="button"
+        ></button>
+        <img src="" alt="" class="elements__image" />
+        <div class="elements__places">
+          <p class="elements__place"></p>
+          <button
+            class="elements__like"
+            aria-label="Botão Like"
+            type="button"
+          ></button>
         </div>
       </div>
-      <div class="popup" id="image-popup">
-        <div class="popup__container popup__container_type_image">
-          <button class="popup__close" type="button"></button>
-          <img class="popup__image" src="#" alt="">
-          <p class="popup__caption"></p>
-        </div>
-      </div>
-      <template id="card-template">
-        <div class="elements__card">
-          <button class="elements__delete-button" aria-label="Deletar card" type="button"></button>
-          <img src="" alt="" class="elements__image"/>
-          <div class="elements__places">
-            <p class="elements__place"></p>
-            <button class="elements__like" aria-label="Botão Like" type="button">
-              
-            </button>
-          </div>
-        </div>
-      </template>
+    </template>
     <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>
