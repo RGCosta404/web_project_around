@@ -1,6 +1,14 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import FormValidator from './components/FormValidator.js';
 import { openPopup, closePopup, closeByEscape } from './utils.js';
+import UserInfo from './components/UserInfo.js';
+import Card from './components/Card.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import Section from './components/Section.js';
+
+const userInfo = new UserInfo({
+  name: '.profile__name',
+  job: '.profile__role' 
+});
 const addButton = document.querySelector('.content__add');
 const addPopup = document.querySelector('#add-popup');
 const addCloseButton = addPopup.querySelector('.popup__close');
@@ -18,10 +26,8 @@ const profileRole = document.querySelector('.profile__role');
 const nameInput = document.querySelector('.popup__input[name="name"]');
 const roleInput = document.querySelector('.popup__input[name="role"]'); 
 
-const imagePopup = document.querySelector('#image-popup');
-const imagePopupImage = imagePopup.querySelector('.popup__image');
-const imagePopupCaption = imagePopup.querySelector('.popup__caption');
-const imagePopupCloseButton = imagePopup.querySelector('.popup__close');
+const imagePopup = new PopupWithImage('#image-popup');
+imagePopup.setEventListeners();
 const addFormValidator = new FormValidator({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -41,9 +47,19 @@ const editFormValidator = new FormValidator({
 }, editFormElement);
 editFormValidator.enableValidation();
 
+function handleCardClick(name, link) {
+    imagePopup.open(name, link);
+}
+
+function createCard(cardData) {
+    const card = new Card(cardData, '#card-template', handleCardClick);
+    return card.generateCard();
+}
+
 function openEditPopup() {
-    nameInput.value = profileName.textContent;
-    roleInput.value = profileRole.textContent;
+    const currentUserInfo = userInfo.getUserInfo();
+    nameInput.value = currentUserInfo.name;
+    roleInput.value = currentUserInfo.job;
     editFormValidator.resetValidation();
     openPopup(popup);
 }
@@ -52,14 +68,15 @@ function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     const nameValue = nameInput.value;
     const roleValue = roleInput.value;
-    profileName.textContent = nameValue;
-    profileRole.textContent = roleValue;
+    userInfo.setUserInfo({
+    name: nameValue,
+    job: roleValue
+    });
     closePopup(popup);
 }
 
 closeButton.addEventListener('click', () => closePopup(popup));
 addCloseButton.addEventListener('click', () => closePopup(addPopup));
-imagePopupCloseButton.addEventListener('click', () => closePopup(imagePopup));
 addButton.addEventListener('click', openAddPopup);
 editButton.addEventListener('click', openEditPopup);
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
@@ -93,10 +110,13 @@ const initialCards = [
   }
 ];
 
-function createCard(cardData) {
-    const card = new Card(cardData, '#card-template');
-    return card.generateCard();
-}
+const cardSection = new Section({
+    items: initialCards, 
+    renderer: (cardData) => {
+        const cardElement = createCard(cardData);
+        cardSection.addItem(cardElement);
+    }
+}, '.elements__list');
 
 initialCards.forEach(element => {
     const cardElement = createCard(element);
@@ -141,9 +161,10 @@ addPopup.addEventListener('click', function(evt) {
     }
 });
 
-imagePopup.addEventListener('click', function(evt) {
+const imagePopupElement = document.querySelector('#image-popup');
+imagePopupElement.addEventListener('click', function(evt) {
     if (evt.target === evt.currentTarget) {
-        closePopup(imagePopup);
+        closePopup(imagePopupElement);
     }
 });
 

@@ -1,9 +1,10 @@
 class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._link = data.link;
-    this._cardSelector = cardSelector;
-  }
+  constructor(data, cardSelector, handleCardClick) {
+        this._name = data.name;
+        this._link = data.link;
+        this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
+    }
     _getTemplate() {
         const cardElement = document
         .querySelector(this._cardSelector) 
@@ -50,15 +51,7 @@ class Card {
     }
 
     _handleImageClick() {
-        const imagePopup = document.querySelector('#image-popup');
-        const imagePopupImage = imagePopup.querySelector('.popup__image');
-        const imagePopupCaption = imagePopup.querySelector('.popup__caption');
-
-        imagePopupImage.src = this._link;
-        imagePopupImage.alt = this._name;
-        imagePopupCaption.textContent = this._name;
-
-        imagePopup.style.display = 'flex';
+        this._handleCardClick(this._name, this._link);
     }
 }
 
