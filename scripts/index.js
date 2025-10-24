@@ -120,17 +120,13 @@ const cardSection = new Section(
     items: initialCards,
     renderer: (cardData) => {
       const cardElement = createCard(cardData);
-      cardSection.addItem(cardElement);
+      return cardElement;
     },
   },
-  ".elements__list"
+  ".elements"
 );
 
-initialCards.forEach((element) => {
-  const cardElement = createCard(element);
-  const elementsSection = document.querySelector(".elements");
-  elementsSection.appendChild(cardElement);
-});
+cardSection.renderItems();
 
 function openAddPopup() {
   placeInput.value = "";
