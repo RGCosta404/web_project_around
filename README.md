@@ -1,42 +1,45 @@
-# EUA Afora
+## 🎯 Sobre o Projeto
 
-Uma aplicação web interativa que permite aos usuários compartilhar e explorar lugares incríveis dos Estados Unidos através de uma galeria de fotos personalizada.
+EUA Afora permite aos usuários criar uma galeria personalizada de locais, com funcionalidades completas de perfil, interação social e gerenciamento de conteúdo através de uma API integrada.
 
-## 🌟 Funcionalidades
+## ✨ Funcionalidades
 
-### ✅ Galeria Interativa
+**Perfil do Usuário**
 
-- Visualização de cartões com imagens e descrições de locais
-- Funcionalidade de "curtir" para marcar lugares favoritos
-- Remoção de cartões criados pelo usuário
+- Edição de informações pessoais (nome e descrição)
+- Atualização de foto do perfil com validação
+- Interface responsiva com feedback visual
 
-### ✅ Formulários Validados
+**Galeria Interativa**
 
-- **Editar Perfil**: Atualização de nome e descrição do usuário
-- **Adicionar Local**: Criação de novos cartões com título e URL da imagem
-- Validação em tempo real com mensagens de erro
-- Botões dinâmicos (ativo/inativo) baseados na validação
-
-### ✅ Pop-ups Inteligentes
-
-- Abertura e fechamento suave de janelas modais
-- Fechamento por clique na sobreposição
-- Fechamento pela tecla **Esc**
+- Adição e remoção de cartões de locais
+- Sistema de curtidas para marcar favoritos
 - Visualização ampliada de imagens
+- Confirmação antes de deletar conteúdo
 
-## 🛠️ Tecnologias Utilizadas
+**Experiência do Usuário**
 
-- **HTML5**: Estrutura semântica
-- **CSS3**: Estilização responsiva com metodologia BEM
-- **JavaScript ES6**: Interatividade e validação de formulários
-- **Git**: Controle de versão
+- Validação em tempo real de formulários
+- Pop-ups inteligentes (Esc, clique externo)
+- Estados de carregamento ("Salvando...")
+- Design responsivo mobile-first
 
-## 📱 Design Responsivo
+## 🛠️ Tecnologias
 
-O projeto foi desenvolvido seguindo o princípio **mobile-first** e é totalmente responsivo em:
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
-- Desktop (1280px+)
-- Tablet (768px - 1279px)
-- Mobile (320px - 767px)
+**Metodologias:** BEM, Mobile-First, OOP  
+**API:** REST com fetch() e Promises  
+**Arquitetura:** Modular com classes ES6
 
-https://github.com/RGCosta404/web_project_around.git
+## 📱 Responsividade
+
+- **Desktop:** 1280px+
+- **Tablet:** 768px - 1279px
+- **Mobile:** 320px - 767px
+
+---
+
+**[Ver Projeto](https://github.com/RGCosta404/web_project_around.git)**

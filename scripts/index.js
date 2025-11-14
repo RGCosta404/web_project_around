@@ -72,7 +72,8 @@ function createCard(cardData) {
     cardData,
     "#card-template",
     handleCardClick,
-    handleDeleteConfirmation
+    handleDeleteConfirmation,
+    handleLikeClick
   );
   return card.generateCard();
 }
@@ -86,6 +87,8 @@ function openEditPopup() {
 }
 
 function handleProfileFormSubmit(inputValues) {
+  editPopup.renderLoading(true);
+
   const nameValue = inputValues.name;
   const roleValue = inputValues.role;
 
@@ -100,6 +103,9 @@ function handleProfileFormSubmit(inputValues) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      editPopup.renderLoading(false);
     });
 }
 
@@ -107,10 +113,16 @@ let cardSection;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
+    console.log("Dados do usuário:", userData);
+    console.log("Cartões recebidos:", cards);
+
     userInfo.setUserInfo({
       name: userData.name,
       job: userData.about,
     });
+
+    const avatarImage = document.querySelector(".content__profile-avatar");
+    avatarImage.src = userData.avatar;
 
     cardSection = new Section(
       {
@@ -125,7 +137,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     cardSection.renderItems();
   })
-  .catch((err) => {});
+  .catch((err) => {
+    console.log("Erro ao carregar dados:", err);
+  });
 
 function openAddPopup() {
   placeInput.value = "";
@@ -135,6 +149,8 @@ function openAddPopup() {
 }
 
 function handleAddFormSubmit(inputValues) {
+  addPopup.renderLoading(true);
+
   const placeValue = inputValues.place;
   const linkValue = inputValues.link;
 
@@ -145,7 +161,10 @@ function handleAddFormSubmit(inputValues) {
       cardSection.addItem(newCardElement);
       addPopup.close();
     })
-    .catch((err) => {});
+    .catch((err) => {})
+    .finally(() => {
+      addPopup.renderLoading(false);
+    });
 }
 
 editPopup.setEventListeners();
@@ -169,6 +188,8 @@ function handleDeleteConfirmation(cardId, cardElement) {
 }
 
 function handleAvatarFormSubmit(inputValues) {
+  avatarPopup.renderLoading(true);
+
   const avatarValue = inputValues.avatar;
 
   api
@@ -180,6 +201,9 @@ function handleAvatarFormSubmit(inputValues) {
     })
     .catch((err) => {
       console.log("Erro ao atualizar avatar:", err);
+    })
+    .finally(() => {
+      avatarPopup.renderLoading(false);
     });
 }
 
@@ -192,3 +216,25 @@ const avatarContainer = document.querySelector(
 avatarContainer.addEventListener("click", () => {
   avatarPopup.open();
 });
+
+function handleLikeClick(cardId, isLiked) {
+  if (isLiked) {
+    api
+      .unlikeCard(cardId)
+      .then((updatedCard) => {
+        console.log("Curtida removida:", updatedCard);
+      })
+      .catch((err) => {
+        console.log("Erro ao remover curtida:", err);
+      });
+  } else {
+    api
+      .likeCard(cardId)
+      .then((updatedCard) => {
+        console.log("Curtida adicionada:", updatedCard);
+      })
+      .catch((err) => {
+        console.log("Erro ao adicionar curtida:", err);
+      });
+  }
+}
