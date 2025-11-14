@@ -4,12 +4,17 @@ class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._form = this._popup.querySelector(".form");
+    this._form = this._popup.querySelector(".popup__form");
     this._inputs = this._form.querySelectorAll(".popup__input");
   }
 
   open() {
+    console.log("Método open() da PopupWithForm chamado!");
+    console.log("Elemento popup:", this._popup);
+
     super.open();
+
+    console.log("Tentando adicionar classe popup_opened...");
     this._form.reset();
   }
 

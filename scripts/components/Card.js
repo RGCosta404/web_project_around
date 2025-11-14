@@ -1,9 +1,11 @@
 class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleDeleteConfirmation) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteConfirmation = handleDeleteConfirmation;
   }
 
   _getTemplate() {
@@ -53,13 +55,12 @@ class Card {
       .classList.toggle("elements__like-active");
   }
 
-  _handleDeleteClick() {
-    this._element.remove();
-    this._element = null;
-  }
-
   _handleImageClick() {
     this._handleCardClick(this._name, this._link);
+  }
+
+  _handleDeleteClick() {
+    this._handleDeleteConfirmation(this._id, this._element);
   }
 }
 

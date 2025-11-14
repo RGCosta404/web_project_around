@@ -1,27 +1,37 @@
 import FormValidator from "./components/FormValidator.js";
-import { openPopup, closePopup, closeByEscape } from "./utils.js";
 import UserInfo from "./components/UserInfo.js";
 import Card from "./components/Card.js";
 import PopupWithImage from "./components/PopupWithImage.js";
+import PopupWithForm from "./components/PopupWithForm.js";
 import Section from "./components/Section.js";
+import Api from "./components/Api.js";
+import PopupWithConfirmation from "./components/PopupWithConfirmation.js";
+
+const confirmationPopup = new PopupWithConfirmation("#confirmation-popup");
+confirmationPopup.setEventListeners();
+
+const api = new Api({
+  baseUrl: "https://around-api.pt-br.tripleten-services.com/v1",
+  headers: {
+    authorization: "ea230205-bcfb-4ccb-940b-03d9c5173331",
+    "Content-Type": "application/json",
+  },
+});
 
 const userInfo = new UserInfo({
   name: ".profile__name",
   job: ".profile__role",
 });
-const addButton = document.querySelector(".content__add");
-const addPopup = document.querySelector("#add-popup");
-const addCloseButton = addPopup.querySelector(".popup__close");
-const addFormElement = addPopup.querySelector(".popup__form");
-const placeInput = document.querySelector('.popup__input[name="place"]');
-const linkInput = document.querySelector('.popup__input[name="link"]');
+
+const addPopupElement = document.querySelector("#add-popup");
+const addFormElement = addPopupElement.querySelector(".popup__form");
+const placeInput = addPopupElement.querySelector('.popup__input[name="place"]');
+const linkInput = addPopupElement.querySelector('.popup__input[name="link"]');
 const editFormElement = document.querySelector("#edit-popup .popup__form");
 const editButton = document.querySelector(".profile__edit");
-const closeButton = document.querySelector(".popup__close");
-const popup = document.querySelector("#edit-popup");
-
-const profileName = document.querySelector(".profile__name");
-const profileRole = document.querySelector(".profile__role");
+const addButton = document.querySelector(".content__add");
+const editPopup = new PopupWithForm("#edit-popup", handleProfileFormSubmit);
+const addPopup = new PopupWithForm("#add-popup", handleAddFormSubmit);
 
 const nameInput = document.querySelector('.popup__input[name="name"]');
 const roleInput = document.querySelector('.popup__input[name="role"]');
@@ -54,11 +64,16 @@ const editFormValidator = new FormValidator(
 editFormValidator.enableValidation();
 
 function handleCardClick(name, link) {
-  imagePopup.open(name, link);
+  imagePopup.open(link, name);
 }
 
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleCardClick);
+  const card = new Card(
+    cardData,
+    "#card-template",
+    handleCardClick,
+    handleDeleteConfirmation
+  );
   return card.generateCard();
 }
 
@@ -67,108 +82,113 @@ function openEditPopup() {
   nameInput.value = currentUserInfo.name;
   roleInput.value = currentUserInfo.job;
   editFormValidator.resetValidation();
-  openPopup(popup);
+  editPopup.open();
 }
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  const nameValue = nameInput.value;
-  const roleValue = roleInput.value;
-  userInfo.setUserInfo({
-    name: nameValue,
-    job: roleValue,
-  });
-  closePopup(popup);
+function handleProfileFormSubmit(inputValues) {
+  const nameValue = inputValues.name;
+  const roleValue = inputValues.role;
+
+  api
+    .updateProfile(nameValue, roleValue)
+    .then((result) => {
+      userInfo.setUserInfo({
+        name: result.name,
+        job: result.about,
+      });
+      editPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-closeButton.addEventListener("click", () => closePopup(popup));
-addCloseButton.addEventListener("click", () => closePopup(addPopup));
-addButton.addEventListener("click", openAddPopup);
-editButton.addEventListener("click", openEditPopup);
-editFormElement.addEventListener("submit", handleProfileFormSubmit);
-addFormElement.addEventListener("submit", handleAddFormSubmit);
+let cardSection;
 
-const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+    });
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardElement = createCard(cardData);
-      return cardElement;
-    },
-  },
-  ".elements"
-);
+    cardSection = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          const cardElement = createCard(cardData);
+          return cardElement;
+        },
+      },
+      ".elements"
+    );
 
-cardSection.renderItems();
+    cardSection.renderItems();
+  })
+  .catch((err) => {});
 
 function openAddPopup() {
   placeInput.value = "";
   linkInput.value = "";
   addFormValidator.resetValidation();
-  openPopup(addPopup);
+  addPopup.open();
 }
 
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
+function handleAddFormSubmit(inputValues) {
+  const placeValue = inputValues.place;
+  const linkValue = inputValues.link;
 
-  const placeValue = placeInput.value;
-  const linkValue = linkInput.value;
-
-  const newCard = {
-    name: placeValue,
-    link: linkValue,
-  };
-
-  initialCards.push(newCard);
-  const newCardElement = createCard(newCard);
-  cardSection.addItem(newCardElement);
-  closePopup(addPopup);
+  api
+    .addCard(placeValue, linkValue)
+    .then((newCard) => {
+      const newCardElement = createCard(newCard);
+      cardSection.addItem(newCardElement);
+      addPopup.close();
+    })
+    .catch((err) => {});
 }
 
-popup.addEventListener("click", function (evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popup);
-  }
-});
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+editButton.addEventListener("click", openEditPopup);
+addButton.addEventListener("click", openAddPopup);
 
-addPopup.addEventListener("click", function (evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(addPopup);
-  }
-});
+function handleDeleteConfirmation(cardId, cardElement) {
+  confirmationPopup.open();
+  confirmationPopup.setAction(() => {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        cardElement.remove();
+        confirmationPopup.close();
+      })
+      .catch((err) => {
+        console.log("Erro ao deletar cartão:", err);
+      });
+  });
+}
 
-const imagePopupElement = document.querySelector("#image-popup");
-imagePopupElement.addEventListener("click", function (evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(imagePopupElement);
-  }
-});
+function handleAvatarFormSubmit(inputValues) {
+  const avatarValue = inputValues.avatar;
 
-document.addEventListener("keydown", closeByEscape);
+  api
+    .updateAvatar(avatarValue)
+    .then((result) => {
+      const avatarImage = document.querySelector(".content__profile-avatar");
+      avatarImage.src = result.avatar;
+      avatarPopup.close();
+    })
+    .catch((err) => {
+      console.log("Erro ao atualizar avatar:", err);
+    });
+}
+
+const avatarPopup = new PopupWithForm("#avatar-popup", handleAvatarFormSubmit);
+avatarPopup.setEventListeners();
+
+const avatarContainer = document.querySelector(
+  ".content__profile-avatar-container"
+);
+avatarContainer.addEventListener("click", () => {
+  avatarPopup.open();
+});
