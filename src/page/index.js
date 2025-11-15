@@ -1,11 +1,11 @@
-import FormValidator from "./components/FormValidator.js";
-import UserInfo from "./components/UserInfo.js";
-import Card from "./components/Card.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import Section from "./components/Section.js";
-import Api from "./components/Api.js";
-import PopupWithConfirmation from "./components/PopupWithConfirmation.js";
+import FormValidator from "../components/FormValidator.js";
+import UserInfo from "../components/UserInfo.js";
+import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
+import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 const confirmationPopup = new PopupWithConfirmation("#confirmation-popup");
 confirmationPopup.setEventListeners();
@@ -101,9 +101,7 @@ function handleProfileFormSubmit(inputValues) {
       });
       editPopup.close();
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch((err) => {})
     .finally(() => {
       editPopup.renderLoading(false);
     });
@@ -113,9 +111,6 @@ let cardSection;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    console.log("Dados do usuário:", userData);
-    console.log("Cartões recebidos:", cards);
-
     userInfo.setUserInfo({
       name: userData.name,
       job: userData.about,
@@ -137,9 +132,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     cardSection.renderItems();
   })
-  .catch((err) => {
-    console.log("Erro ao carregar dados:", err);
-  });
+  .catch((err) => {});
 
 function openAddPopup() {
   placeInput.value = "";
@@ -181,9 +174,7 @@ function handleDeleteConfirmation(cardId, cardElement) {
         cardElement.remove();
         confirmationPopup.close();
       })
-      .catch((err) => {
-        console.log("Erro ao deletar cartão:", err);
-      });
+      .catch((err) => {});
   });
 }
 
@@ -199,9 +190,7 @@ function handleAvatarFormSubmit(inputValues) {
       avatarImage.src = result.avatar;
       avatarPopup.close();
     })
-    .catch((err) => {
-      console.log("Erro ao atualizar avatar:", err);
-    })
+    .catch((err) => {})
     .finally(() => {
       avatarPopup.renderLoading(false);
     });
@@ -221,20 +210,12 @@ function handleLikeClick(cardId, isLiked) {
   if (isLiked) {
     api
       .unlikeCard(cardId)
-      .then((updatedCard) => {
-        console.log("Curtida removida:", updatedCard);
-      })
-      .catch((err) => {
-        console.log("Erro ao remover curtida:", err);
-      });
+      .then((updatedCard) => {})
+      .catch((err) => {});
   } else {
     api
       .likeCard(cardId)
-      .then((updatedCard) => {
-        console.log("Curtida adicionada:", updatedCard);
-      })
-      .catch((err) => {
-        console.log("Erro ao adicionar curtida:", err);
-      });
+      .then((updatedCard) => {})
+      .catch((err) => {});
   }
 }

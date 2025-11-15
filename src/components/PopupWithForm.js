@@ -11,12 +11,8 @@ class PopupWithForm extends Popup {
   }
 
   open() {
-    console.log("Método open() da PopupWithForm chamado!");
-    console.log("Elemento popup:", this._popup);
-
     super.open();
 
-    console.log("Tentando adicionar classe popup_opened...");
     this._form.reset();
   }
 
